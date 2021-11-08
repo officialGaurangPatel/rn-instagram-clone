@@ -10,7 +10,9 @@ const Header = () => {
 
 
             <View style={styles.iconsContainer}>
-                <Text style={{ color: 'white' }}>Dummy</Text>
+                <TouchableOpacity>
+                    <Image source={{ uri: "https://img.icons8.com/fluency-systems-regular/60/ffffff/plus-2-math.png" }} style={styles.icon}></Image>
+                </TouchableOpacity>
                 <Text style={{ color: 'white' }}>Dummy</Text>
                 <Text style={{ color: 'white' }}>Dummy</Text>
             </View>
@@ -32,7 +34,15 @@ const styles = StyleSheet.create({
     },
     iconsContainer: {
         flexDirection: 'row'
+    },
+    icon: {
+        color: 'white',
+        height: 30,
+        width: 30,
+        marginLeft: 10,
+        resizeMode: 'contain'
     }
+
 })
 
 export default Header
