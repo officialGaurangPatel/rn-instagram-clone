@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, SafeAreaView, StyleSheet } from 'react-native'
 import Header from '../Components/home/Header'
+import Post from '../Components/home/Post'
 import Stories from '../Components/home/Stories'
 
 const HomeScreen = () => {
@@ -8,6 +9,7 @@ const HomeScreen = () => {
         <SafeAreaView style={styles.container}>
             <Header />
             <Stories />
+            <Post />
         </SafeAreaView>
     )
 }
