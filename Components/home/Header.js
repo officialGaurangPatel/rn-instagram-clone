@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     icon: {
-        color: 'white',
         height: 30,
         width: 30,
         marginLeft: 10,
