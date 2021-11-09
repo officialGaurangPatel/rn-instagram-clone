@@ -7,8 +7,10 @@ const Post = ({ post }) => {
     console.log(post);
     return (
         <View style={{ marginBottom: 30 }}>
-            <Divider orientation="vertical" width={5} color='white' />
+            <Divider orientation="horizontal" width={2} />
             <PostHeader post={post} />
+            <PostImage post={post} />
+
         </View>
     )
 }
@@ -20,6 +22,18 @@ const PostHeader = ({ post }) => (
             <Text style={{ color: 'white', fontWeight: 600, marginLeft: 6, alignItems: 'center' }}>{post.user}</Text>
         </View>
         <Text style={{ color: 'white', fontWeight: '900' }}>...</Text>
+    </View>
+)
+
+const PostImage = ({ post }) => (
+    <View style={{ width: '100%', height: 450 }}>
+        <Image source={{ uri: post.imageurl }} style={{ height: '100%', resizeMode: 'cover' }} />
+    </View>
+)
+
+const PostFooter = ({ post }) => (
+    <View>
+
     </View>
 )
 const styles = StyleSheet.create({
