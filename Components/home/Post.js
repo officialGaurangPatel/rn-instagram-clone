@@ -1,8 +1,27 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 // import { Divider } from 'react-native-elements'
 import { Divider } from 'react-native-elements';
 
+const postFooterIcons = [
+    {
+        name: 'Like',
+        imageurl: "https://img.icons8.com/material-outlined/60/ffffff/filled-like.png",
+        likedimageurl: "https://img.icons8.com/ios-glyphs/90/fa314a/filled-like.png"
+    },
+    {
+        name: 'Comment',
+        imageurl: "https://img.icons8.com/material-outlined/24/ffffff/comments--v1.png"
+    },
+    {
+        name: 'Share',
+        imageurl: "https://img.icons8.com/external-those-icons-fill-those-icons/24/ffffff/external-share-network-sharing-those-icons-fill-those-icons.png"
+    },
+    {
+        name: 'Save',
+        imageurl: 'https://img.icons8.com/ios/50/ffffff/save--v1.png'
+    },
+]
 const Post = ({ post }) => {
     console.log(post);
     return (
@@ -10,7 +29,9 @@ const Post = ({ post }) => {
             <Divider orientation="horizontal" width={2} />
             <PostHeader post={post} />
             <PostImage post={post} />
-
+            <View style={{ marginHorizontal: 15, marginTop: 10 }}>
+                <PostFooter post={post} />
+            </View>
         </View>
     )
 }
@@ -32,9 +53,22 @@ const PostImage = ({ post }) => (
 )
 
 const PostFooter = ({ post }) => (
-    <View>
-
+    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <View style={{ flexDirection: 'row', width: '32%' }}>
+            <Icon imgStyle={styles.footerIcon} imgurl={postFooterIcons[0].imageurl} />
+            <Icon imgStyle={styles.footerIcon} imgurl={postFooterIcons[1].imageurl} />
+            <Icon imgStyle={styles.footerIcon} imgurl={postFooterIcons[2].imageurl} />
+        </View>
+        <View>
+            <Icon imgStyle={styles.footerIcon} imgurl={postFooterIcons[3].imageurl} />
+        </View>
     </View>
+)
+
+const Icon = ({ imgStyle, imgurl }) => (
+    <TouchableOpacity>
+        <Image style={imgStyle} source={{ uri: imgurl }} />
+    </TouchableOpacity>
 )
 const styles = StyleSheet.create({
     stories: {
@@ -44,6 +78,12 @@ const styles = StyleSheet.create({
         marginLeft: 6,
         borderWidth: 1.6,
         borderColor: '#ff8501'
+    },
+
+    footerIcon: {
+        width: 33,
+        height: 33,
+        marginLeft: 5
     }
 })
 

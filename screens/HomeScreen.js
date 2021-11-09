@@ -13,10 +13,13 @@ const HomeScreen = () => {
             <SafeAreaView style={styles.container}>
                 <Header />
                 <Stories />
-                <ScrollView >
-                    {POSTS.map((post, index) => (
-                        <Post key={index} post={post} />
-                    ))}
+                <ScrollView>
+                    <View style={{ flex: 1 }}>
+                        {POSTS.map((post, index) => (
+                            <Post key={index} post={post} />
+                        ))
+                        }
+                    </View>
                 </ScrollView>
             </SafeAreaView>
         </SafeAreaProvider>
