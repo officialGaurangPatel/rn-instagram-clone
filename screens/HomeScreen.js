@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-view';
 import { POSTS } from '../Components/data/posts';
+import BottomTabs from '../Components/home/BottomTabs';
 
 import Header from '../Components/home/Header'
 import Post from '../Components/home/Post'
@@ -21,6 +22,7 @@ const HomeScreen = () => {
                         }
                     </View>
                 </ScrollView>
+                <BottomTabs />
             </SafeAreaView>
         </SafeAreaProvider>
     )
