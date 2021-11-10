@@ -25,8 +25,8 @@ export const bottomTabsIcons = [
     },
     {
         name: 'Profile',
-        active: "https://instagram.famd3-1.fna.fbcdn.net/v/t51.2885-19/s150x150/253066681_1089534191820168_7805445554870843912_n.jpg?_nc_ht=instagram.famd3-1.fna.fbcdn.net&_nc_cat=100&_nc_ohc=c803g8ezeGgAX-oCfz3&edm=ABfd0MgBAAAA&ccb=7-4&oh=a3d0691148e5f9c99b0ec74272d5c3e0&oe=619347AF&_nc_sid=7bff83",
-        inactive: "https://instagram.famd3-1.fna.fbcdn.net/v/t51.2885-19/s150x150/253066681_1089534191820168_7805445554870843912_n.jpg?_nc_ht=instagram.famd3-1.fna.fbcdn.net&_nc_cat=100&_nc_ohc=c803g8ezeGgAX-oCfz3&edm=ABfd0MgBAAAA&ccb=7-4&oh=a3d0691148e5f9c99b0ec74272d5c3e0&oe=619347AF&_nc_sid=7bff83",
+        active: "https://img.icons8.com/ios-filled/50/ffffff/user--v1.png",
+        inactive: "https://img.icons8.com/ios/50/ffffff/user--v1.png",
     },
 ]
 
@@ -38,19 +38,32 @@ const BottomTabs = ({ icons }) => {
         </TouchableOpacity>
     )
     return (
-        <View>
-            {icons.map((icon, index) => (
-                <Icon key={index} icon={icon} />
-            ))}
+        <View style={styles.wrapper}>
+            <Divider width={5} orientation='vertical' color='white' />
+            <View style={styles.container}>
+                {icons.map((icon, index) => (
+                    <Icon key={index} icon={icon} />
+                ))}
+            </View>
 
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    wrapper: {
+
+    },
     icon: {
         height: 30,
         width: 30
+    },
+    container: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        height: 50,
+        paddingTop: 10
     }
+
 })
 export default BottomTabs

@@ -10,21 +10,19 @@ import Stories from '../Components/home/Stories'
 
 const HomeScreen = () => {
     return (
-        <SafeAreaProvider>
-            <SafeAreaView style={styles.container}>
-                <Header />
-                <Stories />
-                <ScrollView>
-                    <View style={{ flex: 1 }}>
-                        {POSTS.map((post, index) => (
-                            <Post key={index} post={post} />
-                        ))
-                        }
-                    </View>
-                </ScrollView>
-                <BottomTabs icons={bottomTabsIcons} />
-            </SafeAreaView>
-        </SafeAreaProvider>
+        // <SafeAreaProvider>
+        <SafeAreaView style={styles.container}>
+            <Header />
+            <Stories />
+            <ScrollView>
+                {POSTS.map((post, index) => (
+                    <Post key={index} post={post} />
+                ))
+                }
+            </ScrollView>
+            <BottomTabs icons={bottomTabsIcons} />
+        </SafeAreaView>
+        // </SafeAreaProvider>
     )
 }
 
