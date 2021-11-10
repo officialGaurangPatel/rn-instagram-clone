@@ -34,7 +34,14 @@ const BottomTabs = ({ icons }) => {
     const [activeTab, setActiveTab] = useState('Home')
     const Icon = ({ icon }) => (
         <TouchableOpacity onPress={() => setActiveTab(icon.name)}>
-            <Image source={{ uri: icon.inactive }} style={styles.icon} />
+            <Image source={{ uri: activeTab === icon.name ? icon.active : icon.inactive }}
+                style={[styles.icon,
+                icon.name === 'Profile' ? {
+                    borderRadius: 50,
+                    borderWidth: activeTab === 'Profile' ? 2 : 0,
+                    borderColor: '#fff'
+                } : null,
+                ]} />
         </TouchableOpacity>
     )
     return (
@@ -52,7 +59,11 @@ const BottomTabs = ({ icons }) => {
 
 const styles = StyleSheet.create({
     wrapper: {
-
+        position: 'absolute',
+        width: '100%',
+        bottom: '2%',
+        zIndex: 999,
+        backgroundColor: '#000'
     },
     icon: {
         height: 30,
@@ -63,7 +74,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         height: 50,
         paddingTop: 10
-    }
-
+    },
 })
 export default BottomTabs
