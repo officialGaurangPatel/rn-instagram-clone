@@ -34,10 +34,11 @@ const Post = ({ post }) => {
                 <Likes post={post} />
                 <Caption post={post} />
                 {!!post.comments?.length && (
-                    <Comments post={post} />)}
-                {!!post.comments?.length && (
-                    <CommentSection post={post} />)}
-
+                    <>
+                        <Comments post={post} />
+                        <CommentSection post={post} />
+                    </>
+                )}
             </View>
         </View>
     )
@@ -79,13 +80,13 @@ const Icon = ({ imgStyle, imgurl }) => (
 )
 
 const Likes = ({ post }) => (
-    <View style={{ flexDirection: 'row', marginTop: 4 }}>
+    <View style={{ flexDirection: 'row', marginTop: 4, marginLeft: 10 }}>
         <Text style={{ color: 'white', fontWeight: '600' }}>{post.likes.toLocaleString('en')} Likes</Text>
     </View>
 )
 
 const Caption = ({ post }) => (
-    <View style={{ marginTop: 5 }}>
+    <View style={{ marginTop: 5, marginLeft: 10 }}>
         <Text style={{ color: 'white' }}>
             <Text style={{ fontWeight: '700' }}>{post.user}</Text>
             <Text style={{ marginLeft: 5 }}>{post.caption.length > 150 ? post.caption.slice(0, 150).toLowerCase() + '...' : post.caption.toLowerCase()}</Text>
@@ -94,7 +95,7 @@ const Caption = ({ post }) => (
 )
 
 const Comments = ({ post }) => (
-    <View style={{ marginTop: 5 }}>
+    <View style={{ marginTop: 5, marginLeft: 10 }}>
         <Text style={{ color: 'gray' }}>
             <Text>View {post.comments.length > 1 ? `all ${post.comments.length}` : null}</Text>
             {' '}{post.comments.length > 1 ? 'comments' : 'comment'}
@@ -105,7 +106,7 @@ const Comments = ({ post }) => (
 const CommentSection = ({ post }) => (
     <>
         {post.comments?.map((comment, index) => (
-            <View key={index} style={{ flexDirection: 'row', marginTop: 5 }}>
+            <View key={index} style={{ flexDirection: 'row', marginTop: 5, marginLeft: 10 }}>
                 <Text style={{ color: 'white' }}>
                     <Text style={{ fontWeight: '600' }}>{comment.user}</Text>
                     <Text>{' '}{comment.comment}</Text>
