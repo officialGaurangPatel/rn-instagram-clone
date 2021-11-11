@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
-const LoginForm = () => {
+const LoginForm = ({ navigation }) => {
     return (
         <View style={styles.wrapper}>
             <View style={styles.inputFields}>
@@ -36,7 +36,7 @@ const LoginForm = () => {
 
             <View style={styles.signupContainer}>
                 <Text>Don't have an account? </Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.push('SignupScreen')}>
                     <Text style={{ color: '#6BB0F5' }}>Sign Up</Text>
                 </TouchableOpacity>
             </View>

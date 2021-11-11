@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native'
 const SignupScreen = () => {
     return (
         <View>
-            <Text></Text>
+            <Text>SignupScreen</Text>
         </View>
     )
 }
