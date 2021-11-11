@@ -21,7 +21,7 @@ const FormikPostUploader = () => {
             {({ handleBlur, handleChange, handleSubmit, values, errors, isValid }) =>
                 <>
                     <View style={{ margin: 20, justifyContent: 'space-between', flexDirection: 'row' }}>
-                        <Image style={{ width: 100, height: 90 }} source={{ uri: placeholder_Img }} />
+                        <Image style={{ width: 100, height: 90 }} source={{ uri: thumbnailUrl ? thumbnailUrl : placeholder_Img }} />
                         <View style={{ flex: 1, marginLeft: 12 }}>
                             <TextInput
                                 placeholder='Write a caption...'
@@ -35,6 +35,7 @@ const FormikPostUploader = () => {
                         </View>
                     </View>
                     <TextInput
+                        onChange={(e) => setThumbnailUrl(e.nativeEvent.text)}
                         style={{ color: 'white', fontSize: 18, marginLeft: 10 }}
                         placeholder="Enter Image Url"
                         placeholderTextColor='gray'
