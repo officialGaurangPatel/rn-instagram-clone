@@ -27,7 +27,7 @@ const FormikPostUploader = () => {
                                 placeholder='Write a caption...'
                                 placeholderTextColor='gray'
                                 multiline={true}
-                                style={{ color: 'white', fontSize: 20 }}
+                                style={{ color: 'white', fontSize: 20, outline: 'none' }}
                                 onChangeText={handleChange('caption')}
                                 onBlur={handleBlur('caption')}
                                 value={values.caption}
@@ -36,7 +36,7 @@ const FormikPostUploader = () => {
                     </View>
                     <TextInput
                         onChange={(e) => setThumbnailUrl(e.nativeEvent.text)}
-                        style={{ color: 'white', fontSize: 18, marginLeft: 10 }}
+                        style={{ color: 'white', fontSize: 18, marginLeft: 10, outline: 'none' }}
                         placeholder="Enter Image Url"
                         placeholderTextColor='gray'
                         onChangeText={handleChange('imageUrl')}
