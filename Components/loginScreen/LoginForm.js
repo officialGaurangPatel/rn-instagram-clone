@@ -1,46 +1,77 @@
 import React from 'react'
 import { Button, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Formik } from 'formik'
+import * as Yup from 'yup'
+import Validator from 'email-validator'
+
 
 const LoginForm = ({ navigation }) => {
-    return (
-        <View style={styles.wrapper}>
-            <View style={styles.inputFields}>
-                <TextInput
-                    style={{ outline: 'none' }}
-                    placeholderTextColor='#444'
-                    placeholder='Phone Number, Email or UserName'
-                    autoCapitalize='none'
-                    keyboardType='email-address'
-                    textContentType="emailAddress"
-                    autoFocus={true}
-                />
-            </View>
-            <View style={styles.inputFields}>
-                <TextInput
-                    style={{ outline: 'none' }}
-                    placeholderTextColor='#444'
-                    placeholder='Password'
-                    autoCapitalize='none'
-                    autoCorrect={false}
-                    textContentType="password"
-                    secureTextEntry={true}
-                />
-            </View>
-            <TouchableOpacity style={{ alignItems: 'flex-end', marginBottom: 30 }}>
-                <Text style={{ color: '#6BB0F5' }}>Forgot Password?</Text>
-            </TouchableOpacity>
-            <Pressable
-                titleSize={20} style={styles.button}>
-                <Text style={styles.buttonText}>Log In</Text>
-            </Pressable>
+    const LoginFormSchema = Yup.object().shape({
+        email: Yup.string().email().required('An email is required'),
+        password: Yup.string().required().min(6, 'Your Password has to have at least 8 characters')
+    })
 
-            <View style={styles.signupContainer}>
-                <Text>Don't have an account? </Text>
-                <TouchableOpacity onPress={() => navigation.push('SignupScreen')}>
-                    <Text style={{ color: '#6BB0F5' }}>Sign Up</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
+    return (
+        <Formik
+            initialValues={{ email: '', password: '' }}
+            onSubmit={(values) => {
+                console.log(values)
+                navigation.push('HomeScreen')
+            }}
+            validationSchema={LoginFormSchema}
+            validateOnMount={true}
+        >
+            {({ handleBlur, handleChange, handleSubmit, values, errors, isValid }) =>
+                <>
+                    <View style={styles.wrapper}>
+                        <View style={[styles.inputFields,
+                        { borderColor: values.email.length < 1 || Validator.validate(values.email) ? 'ccc' : 'red' }]}>
+                            <TextInput
+                                style={{ outline: 'none' }}
+                                placeholderTextColor='#444'
+                                placeholder='Phone Number, Email or UserName'
+                                autoCapitalize='none'
+                                keyboardType='email-address'
+                                textContentType="emailAddress"
+                                autoFocus={true}
+                                onChangeText={handleChange('email')}
+                                onBlur={handleBlur('email')}
+                                value={values.email}
+                            />
+                        </View>
+                        <View style={[styles.inputFields,
+                        { borderColor: 1 > values.password.length || values.password.length >= 6 ? 'ccc' : 'red' }]}>
+                            <TextInput
+                                style={{ outline: 'none' }}
+                                placeholderTextColor='#444'
+                                placeholder='Password'
+                                autoCapitalize='none'
+                                autoCorrect={false}
+                                textContentType="password"
+                                secureTextEntry={true}
+                                onChangeText={handleChange('password')}
+                                onBlur={handleBlur('password')}
+                                value={values.password}
+                            />
+                        </View>
+
+                        <TouchableOpacity style={{ alignItems: 'flex-end', marginBottom: 30 }}>
+                            <Text style={{ color: '#6BB0F5' }}>Forgot Password?</Text>
+                        </TouchableOpacity>
+
+                        <Button title='Log In' style={styles.button} onPress={handleSubmit} disabled={!isValid} />
+
+                        <View style={styles.signupContainer}>
+                            <Text>Don't have an account? </Text>
+                            <TouchableOpacity onPress={() => navigation.push('SignupScreen')}>
+                                <Text style={{ color: '#6BB0F5' }}>Sign Up</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </>
+            }
+
+        </Formik>
     )
 }
 

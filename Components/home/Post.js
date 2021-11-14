@@ -25,7 +25,7 @@ const postFooterIcons = [
 const Post = ({ post }) => {
     console.log(post);
     return (
-        <View style={{ marginBottom: 30 }}>
+        <View style={{ marginBottom: 30, position: 'relative' }}>
             <Divider orientation="horizontal" width={2} />
             <PostHeader post={post} />
             <PostImage post={post} />

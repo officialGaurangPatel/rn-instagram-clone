@@ -28,6 +28,7 @@ const HomeScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
+        position: 'relative',
         backgroundColor: 'black',
         flex: 1
     }
