@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 const Header = ({ navigation }) => {
     return (
         <View style={styles.container}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.push('SignupScreen')}>
                 <Image style={styles.logo} source={require('../../assets/logo.png')} />
             </TouchableOpacity>
 
