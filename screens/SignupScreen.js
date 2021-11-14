@@ -1,7 +1,9 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
+import SignupForm from '../Components/signupScreen/SignupForm'
 
-const SignupScreen = () => {
+const instagram_logo = "https://img.icons8.com/color/144/000000/instagram-new--v1.png"
+const SignupScreen = ({ navigation }) => {
     return (
         <View>
             <View style={styles.continer}>
@@ -16,4 +18,15 @@ const SignupScreen = () => {
 
 export default SignupScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    continer: {
+        flex: 1,
+        backgroundColor: 'white',
+        paddingTop: 50,
+        paddingHorizontal: 12,
+    },
+    logoContainer: {
+        alignItems: 'center',
+        marginTop: 60
+    }
+})
