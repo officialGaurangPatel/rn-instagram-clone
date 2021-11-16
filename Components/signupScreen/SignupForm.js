@@ -67,9 +67,9 @@ const SignupForm = ({ navigation }) => {
                             />
                         </View>
 
-                        <TouchableOpacity style={{ alignItems: 'flex-end', marginBottom: 30 }}>
+                        {/* <TouchableOpacity style={{ alignItems: 'flex-end', marginBottom: 30 }}>
                             <Text style={{ color: '#6BB0F5' }}>Forgot Password?</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
 
                         <Button title='Sign Up' style={styles.button} onPress={handleSubmit} disabled={!isValid} />
 
@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
     signupContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
-        marginTop: 50
+        marginTop: 50,
+        paddingBottom: 70
     }
 })

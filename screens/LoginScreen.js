@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { Image, StyleSheet, View } from 'react-native'
 import LoginForm from '../Components/loginScreen/LoginForm'
 
-
 const instagram_logo = "https://img.icons8.com/color/144/000000/instagram-new--v1.png"
-
 const LoginScreen = ({ navigation }) => {
-
     return (
         <View style={styles.continer}>
             <View style={styles.logoContainer}>
