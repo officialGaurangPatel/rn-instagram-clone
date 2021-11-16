@@ -59,10 +59,10 @@ const BottomTabs = ({ icons }) => {
 
 const styles = StyleSheet.create({
     wrapper: {
-        position: 'absolute',
-        bottom: 200,
+        position: 'sticky',
+        bottom: 0,
         width: '100%',
-        bottom: '2%',
+        // bottom: '2%',
         zIndex: 999,
         backgroundColor: '#000'
     },
