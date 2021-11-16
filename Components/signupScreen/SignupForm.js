@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Alert, Button, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import Validator from 'email-validator'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import db from '../../firebase'
 
 
 const SignUpFormSchema = Yup.object().shape({
@@ -12,20 +13,39 @@ const SignUpFormSchema = Yup.object().shape({
     password: Yup.string().required().min(6, 'Your Password has to have at least 8 characters')
 })
 const SignupForm = ({ navigation }) => {
+    const [profile_pic, setProfile_pic] = useState();
+    useEffect(() => {
+        getRandomProfilePicture()
+    }, [])
     const auth = getAuth();
-    const signUp = async (email, password) => {
+    const signUp = (email, password, userName) => {
         try {
-            await createUserWithEmailAndPassword(auth, email, password)
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((authUser) => {
+                    console.log(authUser)
+                    db.collection('users').add({
+                        owner_uid: authUser.user.uid,
+                        userName: userName,
+                        email: authUser.user.email,
+                        profile_picture: profile_pic,
+                    })
+                })
             navigation.push('LoginScreen')
         } catch (e) {
             Alert.alert(e.message)
         }
     }
+
+    const getRandomProfilePicture = async () => {
+        const response = await fetch('https://randomuser.me/api')
+        const data = await response.json()
+        setProfile_pic(data.results[0].picture.large);
+    }
     return (
         <Formik
             initialValues={{ email: '', password: '', userName: '' }}
             onSubmit={(values) => {
-                signUp(values.email, values.password)
+                signUp(values.email, values.password, values.userName)
             }}
             validationSchema={SignUpFormSchema}
             validateOnMount={true}
