@@ -18,11 +18,9 @@ const LoginForm = ({ navigation }) => {
     const onLogin = async (email, password) => {
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            // await app.auth().signInWithEmailAndPassword(email, password)
-            console.log("intry")
-            console.log("firebase login", email, password)
+            navigation.push('HomeScreen')
         } catch (e) {
-            console.log("incatch")
+            console.log(e.message)
             Alert.alert(e.message)
         }
     }
