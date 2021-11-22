@@ -1,14 +1,18 @@
-import React from 'react'
-import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
-import { SafeAreaProvider } from 'react-native-safe-area-view';
+import React, { useEffect } from 'react'
+import { StyleSheet, SafeAreaView, ScrollView } from 'react-native'
 import { POSTS } from '../Components/data/posts';
 import BottomTabs, { bottomTabsIcons } from '../Components/home/BottomTabs';
-
 import Header from '../Components/home/Header'
 import Post from '../Components/home/Post'
 import Stories from '../Components/home/Stories'
+import db from '../firebase';
 
 const HomeScreen = ({ navigation }) => {
+    useEffect(() => {
+        db.collectionGroup('posts').onSnapshot(snapshot => {
+            console.log(snapshot.docs.map(doc => doc.data()))
+        })
+    }, [])
     return (
         // <SafeAreaProvider>
         <SafeAreaView style={styles.container}>

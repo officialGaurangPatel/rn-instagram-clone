@@ -23,7 +23,7 @@ const SignupForm = ({ navigation }) => {
             createUserWithEmailAndPassword(auth, email, password)
                 .then((authUser) => {
                     console.log(authUser)
-                    db.collection('users').add({
+                    db.collection('users').doc(authUser.user.email).set({
                         owner_uid: authUser.user.uid,
                         userName: userName,
                         email: authUser.user.email,
