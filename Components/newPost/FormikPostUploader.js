@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, Image, TextInput, Button } from 'react-native'
 import * as Yup from 'yup'
 import { Formik } from 'formik'
 import validUrl from 'valid-url'
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const placeholder_Img = 'https://image.shutterstock.com/image-vector/error-500-page-empty-symbol-260nw-1711106146.jpg'
 
@@ -13,6 +14,28 @@ const uploadPostSchema = Yup.object().shape({
 
 const FormikPostUploader = ({ navigation }) => {
     const [thumbnailUrl, setThumbnailUrl] = useState(placeholder_Img)
+    const [currentLogginUser, setCurrentLogedinUser] = useState(null)
+
+    const getUserName = () => {
+        const auth = getAuth()
+        const user = auth.currentUser;
+        const unSunscribe = db.collection('users').where('owner_uid', '==', user.uid)
+            .limit(1).onSnapshot(snapshot => snapshot.doc.map(doc => {
+                setCurrentLogedinUser({
+                    userName: doc.data().username,
+                    profilePicture: doc.data().profilePicture
+                })
+            }))
+        return unSunscribe
+    }
+
+    useEffect(() => {
+        getUserName()
+    }, [])
+
+    const uploadPostToFirebase = (imageUrl, caption) => {
+
+    }
     return (
         <Formik
             initialValues={{ caption: '', imageUrl: '' }}
