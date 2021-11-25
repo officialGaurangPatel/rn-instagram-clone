@@ -24,6 +24,7 @@ const LoginForm = ({ navigation }) => {
             Alert.alert(e.message)
         }
     }
+
     return (
         <Formik
             initialValues={{ email: '', password: '' }}

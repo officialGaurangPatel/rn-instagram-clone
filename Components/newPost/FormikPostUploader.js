@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, Image, TextInput, Button } from 'react-native'
 import * as Yup from 'yup'
 import { Formik } from 'formik'
+import firebase from "firebase/compat/app";
 import validUrl from 'valid-url'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import db from '../../firebase'
+import { collection, query, where, getDocs } from "firebase/firestore";
+
 
 const placeholder_Img = 'https://image.shutterstock.com/image-vector/error-500-page-empty-symbol-260nw-1711106146.jpg'
 
@@ -16,32 +20,61 @@ const FormikPostUploader = ({ navigation }) => {
     const [thumbnailUrl, setThumbnailUrl] = useState(placeholder_Img)
     const [currentLogginUser, setCurrentLogedinUser] = useState(null)
 
-    const getUserName = () => {
+    const getUserName = async () => {
         const auth = getAuth()
         const user = auth.currentUser;
-        const unSunscribe = db.collection('users').where('owner_uid', '==', user.uid)
-            .limit(1).onSnapshot(snapshot => snapshot.doc.map(doc => {
-                setCurrentLogedinUser({
-                    userName: doc.data().username,
-                    profilePicture: doc.data().profilePicture
-                })
-            }))
-        return unSunscribe
+        console.log("owner_ui", user.uid)
+        const q = query(collection(db, "users"), where("owner_uid", "==", user.uid));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            setCurrentLogedinUser({
+                userName: doc.data().userName,
+                profilePicture: doc.data().profile_picture
+            })
+            console.log(doc.id, " => ", doc.data());
+        });
+        // console.log(`querySnapshot`, querySnapshot)
+        // const unSunscribe = db.collection('users').where("owner_uid", "==", user.uid)
+        //     .limit(1).onSnapshot(snapshot => snapshot.docs.map(doc => {
+        //         console.log(`doc`, doc)
+        //         setCurrentLogedinUser({
+        //             userName: doc.data().username,
+        //             profilePicture: doc.data().profilePicture
+        //         })
+        //     }))
+        // return unSunscribe
     }
+    console.log(`currentLogginUser`, currentLogginUser)
 
     useEffect(() => {
         getUserName()
     }, [])
 
     const uploadPostToFirebase = (imageUrl, caption) => {
+        const auth = getAuth()
+        const unSubscribe = db.collection('users')
+            .doc(auth.currentUser.email)
+            .collection('posts')
+            .add({
+                imageUrl: imageUrl,
+                user: currentLogginUser.userName,
+                profile_picture: currentLogginUser.profilePicture,
+                owner_uid: auth.currentUser.uid,
+                caption: caption,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                likes: 0,
+                likes_by_users: [],
+                comments: []
+            }).then(() => navigation.goBack())
 
+        return unSubscribe
     }
     return (
         <Formik
             initialValues={{ caption: '', imageUrl: '' }}
             onSubmit={(values) => {
-                console.log(values)
-                navigation.push('HomeScreen')
+                uploadPostToFirebase(values.imageUrl, values.caption)
             }}
             validationSchema={uploadPostSchema}
             validateOnMount={true}>
