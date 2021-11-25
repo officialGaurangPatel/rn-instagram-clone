@@ -23,29 +23,15 @@ const FormikPostUploader = ({ navigation }) => {
     const getUserName = async () => {
         const auth = getAuth()
         const user = auth.currentUser;
-        console.log("owner_ui", user.uid)
         const q = query(collection(db, "users"), where("owner_uid", "==", user.uid));
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
             setCurrentLogedinUser({
                 userName: doc.data().userName,
                 profilePicture: doc.data().profile_picture
             })
-            console.log(doc.id, " => ", doc.data());
         });
-        // console.log(`querySnapshot`, querySnapshot)
-        // const unSunscribe = db.collection('users').where("owner_uid", "==", user.uid)
-        //     .limit(1).onSnapshot(snapshot => snapshot.docs.map(doc => {
-        //         console.log(`doc`, doc)
-        //         setCurrentLogedinUser({
-        //             userName: doc.data().username,
-        //             profilePicture: doc.data().profilePicture
-        //         })
-        //     }))
-        // return unSunscribe
     }
-    console.log(`currentLogginUser`, currentLogginUser)
 
     useEffect(() => {
         getUserName()
