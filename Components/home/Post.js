@@ -56,7 +56,7 @@ const PostHeader = ({ post }) => (
 
 const PostImage = ({ post }) => (
     <View style={{ width: '100%', height: 450 }}>
-        <Image source={{ uri: post.imageurl }} style={{ height: '100%', resizeMode: 'cover' }} />
+        <Image source={{ uri: post.imageUrl }} style={{ height: '100%', resizeMode: 'cover' }} />
     </View>
 )
 
@@ -81,15 +81,15 @@ const Icon = ({ imgStyle, imgurl }) => (
 
 const Likes = ({ post }) => (
     <View style={{ flexDirection: 'row', marginTop: 4, marginLeft: 10 }}>
-        <Text style={{ color: 'white', fontWeight: '600' }}>{post.likes.toLocaleString('en')} Likes</Text>
+        <Text style={{ color: 'white', fontWeight: '600' }}>{post?.likes?.toLocaleString('en')} Likes</Text>
     </View>
 )
 
 const Caption = ({ post }) => (
     <View style={{ marginTop: 5, marginLeft: 10 }}>
         <Text style={{ color: 'white' }}>
-            <Text style={{ fontWeight: '700' }}>{post.user}</Text>
-            <Text style={{ marginLeft: 5 }}>{post.caption.length > 150 ? post.caption.slice(0, 150).toLowerCase() + '...' : post.caption.toLowerCase()}</Text>
+            <Text style={{ fontWeight: '700' }}>{post?.user}</Text>
+            <Text style={{ marginLeft: 5 }}>{post?.caption?.length > 150 ? post.caption.slice(0, 150).toLowerCase() + '...' : post.caption.toLowerCase()}</Text>
         </Text>
     </View>
 )
